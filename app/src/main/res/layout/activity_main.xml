@@ -39,6 +39,11 @@
         android:id="@+id/edittext_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input"/>
+        android:hint="Input"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minLines="1"
+        />
 
 </LinearLayout>
