@@ -33,7 +33,7 @@ import java.util.Map;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
-    private static final String VERSION_DB = "9";
+    private static final String VERSION_DB = String.valueOf(BuildConfig.AMOUNT_BUILD);
 
     private static final String QUERY_ALL = "query_all";
     private static final String QUERY_INTEGER = "query_integer";
