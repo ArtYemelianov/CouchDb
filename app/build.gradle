@@ -14,31 +14,15 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    def versionPropsFile = file('count.properties')
-    def code = 0
-    if (versionPropsFile.canRead()) {
-        def Properties versionProps = new Properties()
 
-        versionProps.load(new FileInputStream(versionPropsFile))
-
-        code = versionProps['AMOUNT_BUILD'].toInteger() + 1
-
-        // store values
-        versionProps['AMOUNT_BUILD'] = code.toString()
-        versionProps.store(versionPropsFile.newWriter(), null)
-
-
-    } else {
-        throw new GradleException("Could not read version.properties!")
-    }
-
+    def amount = getAndIncreamentAmount();
     buildTypes {
         debug {
-            buildConfigField "int", "AMOUNT_BUILD", code.toString()
+            buildConfigField "int", "AMOUNT_BUILD", amount.toString()
         }
 
         release {
-            buildConfigField "int", "AMOUNT_BUILD", code.toString()
+            buildConfigField "int", "AMOUNT_BUILD", amount.toString()
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -67,5 +51,26 @@ dependencies {
     compile 'org.androidannotations:androidannotations-api:4.1.0'
 
     compile 'com.couchbase.lite:couchbase-lite-android:1.3.1'
+}
 
+
+def getAndIncreamentAmount(){
+    def versionPropsFile = file('count.properties')
+    int amount = 0
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        amount = versionProps['AMOUNT_BUILD'].toInteger() + 1
+
+        // store values
+        versionProps['AMOUNT_BUILD'] = amount.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+
+    } else {
+        throw new GradleException("Could not read version.properties!")
+    }
+    return amount;
 }
