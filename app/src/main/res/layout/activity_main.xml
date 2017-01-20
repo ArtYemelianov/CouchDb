@@ -20,30 +20,68 @@
         android:text="Hello World!"/>
 
     <Button
-        android:id="@+id/saveBtn"
+        android:id="@+id/showAllBtn"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="true"
-        android:text="Save"/>
+        android:text="Show All"/>
 
     <Button
-        android:id="@+id/showBtn"
+        android:id="@+id/showIntegerBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="true"
-        android:text="Show"/>
+        android:text="Show only integer"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/showInterval"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:enabled="true"
+            android:text="Select interval"/>
+
+        <EditText
+            android:id="@+id/edittext_start_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Input"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:maxLines="1"
+            android:minLines="1"/>
+
+        <EditText
+            android:id="@+id/edittext_end_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Input"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:maxLines="1"
+            android:minLines="1"/>
+
+    </LinearLayout>
 
     <EditText
-        android:id="@+id/edittext_label"
-        android:layout_width="match_parent"
+        android:id="@+id/edittext_save_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Input"
         android:imeOptions="actionSend"
         android:inputType="text"
         android:maxLines="1"
-        android:minLines="1"
-        />
+        android:minLines="1"/>
+
 
 </LinearLayout>

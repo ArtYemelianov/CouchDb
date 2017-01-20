@@ -8,23 +8,23 @@ import com.couchbase.lite.Manager;
 import com.couchbase.lite.android.AndroidContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * The helper class, that allow creates instance of general modules of couch database
- * author Artem Emelyanow
+ * The helper class, that allow creates instance of general modules of couch database author Artem
+ * Emelyanow
  */
 public class CouchDatabase {
     private static String KDatabaseName = "danke_ring";
     public static String KDocType = "_doc_type";
 
-    private final Database mDatabase;
+    public final Database mDatabase;
     private final Manager mManager;
 
     private static CouchDatabase mInstance;
 
-    private final List<IInitializeExecutor> mInitializeViews;
+    private final Set<IInitializeExecutor> mInitializeViews;
 
     public static CouchDatabase Instance(Context aContext) {
         if (mInstance == null) {
@@ -40,8 +40,15 @@ public class CouchDatabase {
     }
 
     /**
+     * Add executorsto database
+     * @param aIInitializeExecutor Executor
+     */
+    public void addExecutor(IInitializeExecutor aIInitializeExecutor) {
+        mInitializeViews.add(aIInitializeExecutor);
+    }
+
+    /**
      * Constructor
-     *
      * @param aContext      Context
      * @param aDatabaseName Database
      * @throws CouchbaseLiteException
@@ -53,7 +60,8 @@ public class CouchDatabase {
             throw new IllegalArgumentException("The database name " + aDatabaseName + " is wrong");
         }
         mDatabase = mManager.getDatabase(aDatabaseName);
-        mInitializeViews = new ArrayList<>();
+        mInitializeViews = new HashSet<>();
+
     }
 
     /**
@@ -73,12 +81,12 @@ public class CouchDatabase {
     }
 
     /**
-     * Describes commands that are should be done on start of initialization of database. As views, etc.
+     * Describes commands that are should be done on start of initialization of database. As views,
+     * etc.
      */
     public interface IInitializeExecutor {
         /**
          * Initialize view of database
-         *
          * @param aDatabase Database
          */
         void execute(Database aDatabase);
