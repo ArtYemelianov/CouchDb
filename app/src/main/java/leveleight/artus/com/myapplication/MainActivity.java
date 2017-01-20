@@ -51,6 +51,64 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.edittext_end_label)
     protected TextView mEndLabel;
 
+    @ViewById(R.id.edittext_value)
+    protected EditText mEditOldValueUpdate;
+
+    @EditorAction(R.id.edittext_value)
+    protected void handleUpdateOldValue() {
+        mEditNewValueUpdate.requestFocus();
+    }
+
+    @ViewById(R.id.edittext_value_new)
+    protected EditText mEditNewValueUpdate;
+
+    @EditorAction(R.id.edittext_value_new)
+    protected void handleUpdateNewValue() {
+        handleUpdateBtn();
+    }
+
+    @Click(R.id.updateValueBtn)
+    protected void handleUpdateBtn() {
+        Integer oldValue = Ints.tryParse(mEditOldValueUpdate.getText().toString());
+        Integer newValue = Ints.tryParse(mEditNewValueUpdate.getText().toString());
+
+        Document id = null;
+        if (oldValue != null && oldValue != null) {
+            Query query = mCouchDb.mDatabase.getView(QUERY_INTEGER).createQuery();
+            try {
+                query.setKeys(Arrays.asList(oldValue));
+                QueryEnumerator result = query.run();
+                for (Iterator<QueryRow> it = result; it.hasNext(); ) {
+                    QueryRow row = it.next();
+                    id = row.getDocument();
+                    break;
+                }
+            } catch (CouchbaseLiteException aE) {
+                aE.printStackTrace();
+            }
+        }
+        if (id != null) {
+            try {
+                id.addChangeListener(event -> {
+                    event.getChange();
+                });
+                id.update(newRevision -> {
+                    return false;
+                });
+
+                Map<String, Object> map = new HashMap<>();
+                map.putAll(id.getProperties());
+                map.put(SimpleItem.DATA, String.valueOf(newValue));
+                id.putProperties(map);
+            } catch (CouchbaseLiteException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showMessage("Value doesn't exist");
+        }
+    }
+
+
     @ViewById(R.id.editRemove)
     protected EditText mEditRemoveById;
 
