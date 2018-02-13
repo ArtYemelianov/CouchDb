@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
             QueryEnumerator result = query.run();
             for (Iterator<QueryRow> it = result; it.hasNext(); ) {
                 QueryRow row = it.next();
-                String key = (String) row.getKey();
+                String key = row.getKey().toString();
                 list.add(key);
             }
         } catch (CouchbaseLiteException aE) {

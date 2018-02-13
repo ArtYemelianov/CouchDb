@@ -3,26 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
     tools:context="leveleight.artus.com.myapplication.MainActivity">
 
 
-    <TextView
-        android:id="@+id/status_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
     <EditText
         android:id="@+id/edittext_save_label"
-        android:layout_width="64dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input"
+        android:hint="Add New Value"
         android:imeOptions="actionSend"
         android:inputType="text"
         android:maxLines="1"
@@ -31,7 +25,7 @@
     <Button
         android:id="@+id/showAllBtn"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="true"
         android:text="Show All" />
@@ -39,7 +33,7 @@
     <Button
         android:id="@+id/showIntegerBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="true"
         android:text="Show only integer" />
@@ -56,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:enabled="true"
-            android:text="Select interval" />
+            android:text="Show interval" />
 
         <EditText
             android:id="@+id/edittext_start_label"
@@ -82,10 +76,14 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
     <Button
         android:id="@+id/removeAllBtn"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="true"
         android:text="Remove All" />
@@ -101,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:enabled="true"
-            android:text="Show All" />
+            android:text="Remove" />
 
         <EditText
             android:id="@+id/editRemove"
@@ -116,6 +114,10 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -129,14 +131,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:enabled="true"
-            android:text="Select interval" />
+            android:text="Update" />
 
         <EditText
             android:id="@+id/edittext_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Input"
+            android:hint="Old Value"
             android:imeOptions="actionSend"
             android:inputType="text"
             android:maxLines="1"
@@ -147,13 +149,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Input"
+            android:hint="New Value"
             android:imeOptions="actionSend"
             android:inputType="text"
             android:maxLines="1"
             android:minLines="1" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_margin="10dp"
+        style="@style/TextAppearance.Default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
 
 
 </LinearLayout>
